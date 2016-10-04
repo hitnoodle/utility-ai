@@ -131,13 +131,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _UtilityProperties:
-    _FloatProperties: []
+    _FloatProperties:
+    - _ID: 
+      _MinValue: 0
+      _MaxValue: 0
+      _Value: 0
     _BooleanProperties: []
     _IntegerProperties: []
   _UtilityActions:
     _Actions:
     - _ID: 
-      _Considerations: []
+      _Considerations:
+      - _Property: 
+        _IsGlobalProperty: 0
+        _Curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 0
+          m_PostInfinity: 0
+          m_RotationOrder: 0
+        _Weight: 0
       _OnExecuted:
         m_PersistentCalls:
           m_Calls: []
@@ -146,6 +159,46 @@ MonoBehaviour:
   _Method: 0
   _DebugAction: 
   _CurrentActionID: 
+--- !u!1 &1057876603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1057876604}
+  - 114: {fileID: 1057876605}
+  m_Layer: 0
+  m_Name: Utility AI Blackboard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1057876604
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1057876603}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+--- !u!114 &1057876605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1057876603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aeb5ce37b433194ebe3d1a9f30e51ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1203940208
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +307,7 @@ Transform:
   - {fileID: 54621365}
   - {fileID: 1203940212}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &1536836201
 GameObject:
   m_ObjectHideFlags: 0

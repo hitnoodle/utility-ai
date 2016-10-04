@@ -10,7 +10,8 @@ namespace AI.Utility
         [SerializeField] private string _ID;
         public string ID
         {
-            get { return _ID; }
+            get { return _ID;  }
+            set { _ID = value; }
         }
         
         // Which type is it

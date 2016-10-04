@@ -18,18 +18,22 @@ namespace AI.Utility
         public void Initialize()
         {
             _ActionsCache = new Dictionary<string, Action>();
-            foreach (Action a in _Actions) _ActionsCache.Add(a.ID, a);
+            for (int i = 0; i < _Actions.Length; i++) _ActionsCache.Add(_Actions[i].ID, _Actions[i]);
         }
 
-        public void InitializeConsiderations(UtilityProperties localProperties)
+        public void InitializeConsiderations(UtilityProperties localProperties, UtilityProperties globalProperties)
         {
-            foreach (Action a in _Actions)
+            for (int i = 0; i < _Actions.Length; i++)
             {
                 // Initialize all consideration with the appropriate property
-                foreach (Consideration c in a.Considerations)
+                Consideration[] considerations = _Actions[i].Considerations;
+                for (int j = 0; j < considerations.Length; j++)
                 {
+                    Consideration c = considerations[j];
                     if (!c.IsGlobalProperty)
                         c.Initialize(localProperties.GetProperty(c.Property));
+                    else
+                        c.Initialize(globalProperties.GetProperty(c.Property));
                 }
             }
         }

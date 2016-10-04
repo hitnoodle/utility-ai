@@ -7,13 +7,13 @@ namespace AI.Utility
     public class UtilityProperties
     {
         [Tooltip("For decimal properties")]
-        [SerializeField] private PropertyFloat[] _FloatProperties;
+        [SerializeField] private List<PropertyFloat> _FloatProperties;
 
         [Tooltip("For properties with True/False value")]
-        [SerializeField] private PropertyBool[] _BooleanProperties;
+        [SerializeField] private List<PropertyBool> _BooleanProperties;
 
         [Tooltip("For simple numeric properties")]
-        [SerializeField] private PropertyInt[] _IntegerProperties;
+        [SerializeField] private List<PropertyInt> _IntegerProperties;
 
         // Cache for performance
         private Dictionary<string, Property> _PropertiesCache;
@@ -23,9 +23,9 @@ namespace AI.Utility
         {
             // Just add to cache
             _PropertiesCache = new Dictionary<string, Property>();
-            foreach (Property p in _FloatProperties) _PropertiesCache.Add(p.ID, p);
-            foreach (Property p in _BooleanProperties) _PropertiesCache.Add(p.ID, p);
-            foreach (Property p in _IntegerProperties) _PropertiesCache.Add(p.ID, p);
+            for (int i = 0; i < _FloatProperties.Count; i++) _PropertiesCache.Add(_FloatProperties[i].ID, _FloatProperties[i]);
+            for (int i = 0; i < _BooleanProperties.Count; i++) _PropertiesCache.Add(_BooleanProperties[i].ID, _BooleanProperties[i]);
+            for (int i = 0; i < _IntegerProperties.Count; i++) _PropertiesCache.Add(_IntegerProperties[i].ID, _IntegerProperties[i]);
         }
 
         #region Properties
@@ -90,6 +90,64 @@ namespace AI.Utility
                 ((PropertyInt)p).Value = value;
 
             return p != null;
+        }
+
+        #endregion
+
+        #region Dynamic Properties
+
+        public void AddFloatProperty(string propertyID, float minValue, float maxValue, float currentValue)
+        {
+            // Create
+            PropertyFloat pFloat = new PropertyFloat(minValue, maxValue, currentValue);
+            pFloat.ID = propertyID;
+
+            // Add
+            _FloatProperties.Add(pFloat);
+            _PropertiesCache.Add(pFloat.ID, pFloat);
+        }
+
+        public void AddBoolProperty(string propertyID, bool currentValue)
+        {
+            // Create
+            PropertyBool pBool = new PropertyBool(currentValue);
+            pBool.ID = propertyID;
+
+            // Add
+            _BooleanProperties.Add(pBool);
+            _PropertiesCache.Add(pBool.ID, pBool);
+        }
+
+        public void AddIntProperty(string propertyID, int minValue, int maxValue, int currentValue)
+        {
+            // Create
+            PropertyInt pInt = new PropertyInt(minValue, maxValue, currentValue);
+            pInt.ID = propertyID;
+
+            // Add
+            _IntegerProperties.Add(pInt);
+            _PropertiesCache.Add(pInt.ID, pInt);
+        }
+
+        public void RemoveProperty(string propertyID)
+        {
+            // Do we have this property?
+            Property p;
+            _PropertiesCache.TryGetValue(propertyID, out p);
+
+            if (p != null)
+            {
+                // Delete from list
+                if (p.Type == Property.PropertyType.Float)
+                    _FloatProperties.Remove((PropertyFloat)p);
+                else if (p.Type == Property.PropertyType.Bool)
+                    _BooleanProperties.Remove((PropertyBool)p);
+                else if (p.Type == Property.PropertyType.Int)
+                    _IntegerProperties.Remove((PropertyInt)p);
+
+                // and from Dictionary
+                _PropertiesCache.Remove(propertyID);
+            }
         }
 
         #endregion

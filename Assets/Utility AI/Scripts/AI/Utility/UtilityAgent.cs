@@ -40,7 +40,7 @@ namespace AI.Utility
             _UtilityProperties.Initialize();
 
             _UtilityActions.Initialize();
-            _UtilityActions.InitializeConsiderations(_UtilityProperties);
+            _UtilityActions.InitializeConsiderations(_UtilityProperties, UtilityBlackboard.Instance.GlobalProperties);
         }
 
         #region Delegates
