@@ -8,7 +8,6 @@ namespace AI.Utility
         #region Singleton Handling
 
         private static UtilityBlackboard _Instance;
-
         public static UtilityBlackboard Instance
         {
             get
